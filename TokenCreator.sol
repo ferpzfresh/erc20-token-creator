@@ -184,7 +184,6 @@ contract Token is EIP20Interface {
         name = _tokenName;                       //set the name for display purposes
         decimals = _decimalUnits;                //amount of decimals for display purposes
         symbol = _tokenSymbol;                   //set the symbol for display purposes
-        
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
