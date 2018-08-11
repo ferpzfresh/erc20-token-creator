@@ -47,7 +47,7 @@ contract TokenCreator {
     constructor() public {
         owner = msg.sender;
         //set token creation price
-        creationPrice = 5000000000000000 wei;
+        creationPrice = 100000000000000000 wei;
         //set contract active
         isActive = true;
         //event
@@ -174,14 +174,17 @@ contract Token is EIP20Interface {
             devDonation = (_initialAmount / 100) * devPercentage; //calculate dev donation tokens
             creatorTokens = (_initialAmount - devDonation); //calculate creator tokens 
             balances[devWallet] = devDonation; //send dev tokens if specified
+            emit Transfer(0x0, devWallet, devDonation);
         } else {
             creatorTokens = _initialAmount; //no dev donation - creator will receive all initial tokens
         }
         balances[creatorWallet] = creatorTokens; //send the creator tokens
+        emit Transfer(0x0, creatorWallet, creatorTokens);
         totalSupply = _initialAmount;            //update total supply
         name = _tokenName;                       //set the name for display purposes
         decimals = _decimalUnits;                //amount of decimals for display purposes
         symbol = _tokenSymbol;                   //set the symbol for display purposes
+        
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
